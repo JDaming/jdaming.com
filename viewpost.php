@@ -8,9 +8,26 @@
 		exit;
 	}
 	
-	echo '<div>';
-	    echo '<h1>'.$row['postTitle'].'</h1>';
-	    echo '<p>Posted on'.date("jS M Y",strtotime($row['postDate'])).'</p>';
-	    echo '<p>'.$row['postCont'].'</p>';
-	echo '</div>';
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf8'>
+	<title>Blog -- <?php echo $row['postTitle'];?></title>
+</head>
+<body>
+	<div>
+		<h1>Blog</h1>
+		<hr />
+		<p><a href="./">Blog Index</a></p>
+		<?php
+			echo '<div>';
+            		echo '<h1>'.$row['postTitle'].'</h1>';
+            		echo '<p>Posted on'.date("jS M Y",strtotime($row['postDate'])).'</p>';
+            		echo '<p>'.$row['postCont'].'</p>';
+        		echo '</div>';
+		?>
+	</div>
+</body>
+</html>
