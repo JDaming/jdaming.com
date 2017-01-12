@@ -3,7 +3,7 @@
     require_once ('../includes/config.php');
 
     //if not logged in redirect to login page
-    if ($user->is_logged_in()){header('Location: index.php');}
+    if ($user->is_logged_in()){header('Location: login.php');}
 ?>
 
 <!DOCTYPE html>
@@ -37,36 +37,38 @@
 	    if ($postCont ==''){
 		$error[] = 'Please enter the content';
 	    }
-	}
-	
-	//if no error
-	if (!isset($error)){
-	    
-	    try {
-		
-		//insert into database
-		$stmt = $db->prepare('insert into blog_posts (postTitle,postDesc,postCont,postDate) values (:postTitle,:postDesc,:postCont,:postDate)');
-		$stmt->execute(array(
-			':postTitle'=>$postTitle,
-			':postDesc'=>$postDesc,
-			':postCont'=>$postCont,
-			':postDate'=>date('Y-m-d H:i:s')));
-		
-		//redirect to index
-		header('Location: index.php?action=added');
-		exit;
-	    } catch(PDOException $e) {
-		echo $e->getMessage();
-	    }
-	}
-	
-	//if has error
-	if(isset($error)){
-	   foreach($error as $error){
-		echo '<p class="error">'.$error.'</p>';
-	   }
 
+
+	    //if no error
+            if (!isset($error)){
+
+                try {
+
+                    //insert into database
+                    $stmt = $db->prepare('insert into blog_posts (postTitle,postDesc,postCont,postDate) values (:postTitle,:postDesc,:postCont,:postDate)');
+                    $stmt->execute(array(
+                        ':postTitle'=>$postTitle,
+                        ':postDesc'=>$postDesc,
+                        ':postCont'=>$postCont,
+                        ':postDate'=>date('Y-m-d H:i:s')));
+
+                    //redirect to index
+                    header('Location: index.php?action=added');
+                    exit;
+                } catch(PDOException $e) {
+                    echo $e->getMessage();
+                }
+            }
+
+	    //if has error
+            if(isset($error)){
+               foreach($error as $error){
+                   echo '<p class="error">'.$error.'</p>';
+               }
+
+            }
 	}
+	
 	?>
 	<form action='' method='post'>
 	    <p><label>Title</label><br />

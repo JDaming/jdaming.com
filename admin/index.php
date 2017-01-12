@@ -8,7 +8,7 @@
 	//show message from edit page
 	if (isset($_GET['delpost'])){
 		
-		$stmt = $db->prepare('delete from blog_posts where postID == :postID');
+		$stmt = $db->prepare('delete from blog_posts where postID = :postID');
 		$stmt->execute(array(':postID'=>$_GET['delpost']));
 
 		header('Location: index.php?action=deleted');
@@ -21,6 +21,8 @@
 <head>
 	<meta charset='utf8'>
 	<title>Admin</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 </head>
 <body>
 	<div>
@@ -49,8 +51,8 @@
                 echo '<td>'.date('jS M Y',strtotime($row['postDate'])).'</td>';
 ?>
                 <td>
-                    <a href="edit_post.php?id=<?php echo $row['postID'];?>">Edit</a> |
-                    <a href="javascript:delpost('<?php echo $row['postID']; ?>'),'<?php echo $row['postTitle'];?>'">Delete</a>
+                    <a href="edit-post.php?id=<?php echo $row['postID'];?>">Edit</a> |
+                    <a href="javascript:delpost('<?php echo $row['postID']; ?>','<?php echo $row['postTitle'];?>')">Delete</a>
                 </td>
                 
           <?php echo '</tr>';
@@ -62,7 +64,7 @@
 	</table>
 
 
-	<p><a href='add_post.php'>Add Post</a></p>
+	<p><a href='add-post.php'>Add Post</a></p>
 
 	</div>
 
