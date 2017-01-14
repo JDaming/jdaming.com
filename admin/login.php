@@ -1,9 +1,6 @@
 <?php
 	//include config
 	require_once('../includes/config.php');
-	
-	//if not logged in redirect to login page
-	if ($user->is_logged_in()){header('Location: login.php');}
 ?>
 <html>
 <head>
@@ -23,7 +20,8 @@
 	
 	    $username = trim($_POST['username']);
 	    $password = trim($_POST['password']);
-
+	    echo $username;
+	    echo $password;
 	    if ($user->login($username,$password)){
 		
 		header('Location:index.php');

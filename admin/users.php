@@ -4,7 +4,7 @@
     require_once('../includes/config.php');
 
     //if not logged in redirect to login page
-    if ($user->is_logged_in()){header('Location:login.php');}
+    if (!$user->is_logged_in()){header('Location:login.php');}
 
     //show message from add/edit page
     if (isset($_GET['deluser'])){
@@ -50,9 +50,8 @@
 		?>
 		
 		<td>
-		    <a href="edit-user.php?id=<?php echo $row['memberID'];?>">Edit</a>
 		    <?php if($row["memberID"] != 1){?>
-			|<a href="javascript:deluser('<?php echo $row['memberID'];?>','<?php echo $row['username'];?>')">Delete</a>
+			<a href="javascript:deluser('<?php echo $row['memberID'];?>','<?php echo $row['username'];?>')">Delete</a>
 		    <?php } ?>
 		</td>
 	    <?php 
@@ -62,6 +61,8 @@
 		echo $e->getMessage();
 	}
 	?>
+	</table>
+	<p><a href="add-user.php">Add User</a></p>
 	</div>
 	<script language="JavaScript" type="text/javascript">
 		function deluser(id, name)

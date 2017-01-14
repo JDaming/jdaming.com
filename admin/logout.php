@@ -1,7 +1,8 @@
 <?php
-    require_once('../includs/config.php');
+    require_once('../includes/config.php');
 
     $user->logout();
-    header('Location: index.php');
+    header('Location: ../index.php');
+    exit;
 ?>
 

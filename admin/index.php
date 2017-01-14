@@ -3,7 +3,7 @@
 	require '../includes/config.php';
 
 	//if not logged in redirect to login page
-	if ($user->is_logged_in()){header('Location: login.php');}
+	if (!$user->is_logged_in()){header('Location: login.php');}
 	
 	//show message from edit page
 	if (isset($_GET['delpost'])){
@@ -51,7 +51,7 @@
                 echo '<td>'.date('jS M Y',strtotime($row['postDate'])).'</td>';
 ?>
                 <td>
-                    <a href="edit-post.php?id=<?php echo $row['postID'];?>">Edit</a> |
+		    <a href='edit-post.php'>Edit</a> |
                     <a href="javascript:delpost('<?php echo $row['postID']; ?>','<?php echo $row['postTitle'];?>')">Delete</a>
                 </td>
                 
