@@ -1,6 +1,8 @@
 <?php
+	require_once('includes/config.php');
+
 	$stmt = $db->prepare('select postID,postTitle,postCont,postDate from blog_posts where postID = :postID');
-	$stmt->execute(array('posttID'=>$_GET['id']));
+	$stmt->execute(array(':postID'=>$_GET['id']));
 	$row = $stmt->fetch();
 
 	if ($row['postID'] == ''){

@@ -16,7 +16,7 @@
 		
 		try{
 			$stmt = $this->db->prepare('select password from blog_members where username = :username');
-			$stmt->execute(array('username'=>$username));
+			$stmt->execute(array(':username'=>$username));
 
 			$row = $stmt->fetch();
 			return $row['password'];
@@ -29,8 +29,7 @@
 	public function login($username,$password){
 		
 		$hashed = $this->get_user_hash($username);
-		
-		if (password_verify($password,$hashed) == 1){
+		if (password_verify($password,$hashed)){
 			
 			$_SESSION['loggedin'] = true;
 			return true;
@@ -38,7 +37,7 @@
 	}
 	
 	public function logout(){
-		session_destory();
+		session_destroy();
 	}
 	
     }//class 

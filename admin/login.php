@@ -18,10 +18,9 @@
 <?php
 	if(isset($_POST['submit'])){
 	
-	    $username = trim($_POST['username']);
+	    $username =trim($_POST['username']);
 	    $password = trim($_POST['password']);
-	    echo $username;
-	    echo $password;
+	    
 	    if ($user->login($username,$password)){
 		
 		header('Location:index.php');
